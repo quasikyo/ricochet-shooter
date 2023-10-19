@@ -1,0 +1,41 @@
+[gd_scene load_steps=5 format=3 uid="uid://dy1fdu0bjxfmv"]
+
+[ext_resource type="Texture2D" uid="uid://bnwvt5ydk67k" path="res://platform.png" id="1_fn08c"]
+[ext_resource type="PackedScene" uid="uid://bqly54b5407rb" path="res://player.tscn" id="2_a2fpn"]
+
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_wsvut"]
+texture = ExtResource("1_fn08c")
+texture_region_size = Vector2i(32, 32)
+1:0/0 = 0
+1:0/0/physics_layer_0/linear_velocity = Vector2(0, 0)
+1:0/0/physics_layer_0/angular_velocity = 0.0
+1:0/0/physics_layer_0/polygon_0/points = PackedVector2Array(-16, -2.00781, 16, -1.99816, 16, 1.995, -16, 2)
+2:0/0 = 0
+2:0/0/physics_layer_0/linear_velocity = Vector2(0, 0)
+2:0/0/physics_layer_0/angular_velocity = 0.0
+2:0/0/physics_layer_0/polygon_0/points = PackedVector2Array(-16, -2.00781, 0.0393734, -1.96863, 0.0278406, 2.01844, -16, 2.00905)
+0:0/0 = 0
+0:0/0/physics_layer_0/linear_velocity = Vector2(0, 0)
+0:0/0/physics_layer_0/angular_velocity = 0.0
+0:0/0/physics_layer_0/polygon_0/points = PackedVector2Array(16, 2.00781, -0.0393734, 1.96863, -0.0278406, -2.01844, 16, -2.00905)
+
+[sub_resource type="TileSet" id="TileSet_k2qc8"]
+tile_size = Vector2i(32, 32)
+physics_layer_0/collision_layer = 1
+sources/0 = SubResource("TileSetAtlasSource_wsvut")
+
+[node name="Root" type="Node2D"]
+
+[node name="Platforms" type="Node2D" parent="."]
+
+[node name="TileMap" type="TileMap" parent="Platforms"]
+tile_set = SubResource("TileSet_k2qc8")
+format = 2
+layer_0/tile_data = PackedInt32Array(786445, 65536, 0, 786446, 65536, 0, 786447, 65536, 0, 786448, 65536, 0, 786444, 0, 0, 786449, 131072, 0, 458765, 65536, 0, 458766, 65536, 0, 458767, 65536, 0, 458768, 65536, 0, 458769, 65536, 0, 458764, 0, 0, 458770, 131072, 0)
+
+[node name="Player" parent="." instance=ExtResource("2_a2fpn")]
+unique_name_in_owner = true
+position = Vector2(481, 363)
+
+[node name="Projectiles" type="Node2D" parent="."]
+unique_name_in_owner = true
