@@ -1,10 +1,10 @@
 [gd_scene load_steps=5 format=3 uid="uid://dy1fdu0bjxfmv"]
 
-[ext_resource type="Texture2D" uid="uid://bnwvt5ydk67k" path="res://platform.png" id="1_fn08c"]
-[ext_resource type="PackedScene" uid="uid://bqly54b5407rb" path="res://player.tscn" id="2_a2fpn"]
+[ext_resource type="Texture2D" uid="uid://bnwvt5ydk67k" path="res://graphics/platform.png" id="1_dxc0q"]
+[ext_resource type="PackedScene" uid="uid://utlbjh7fedb1" path="res://player/player.tscn" id="2_a2fpn"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_wsvut"]
-texture = ExtResource("1_fn08c")
+texture = ExtResource("1_dxc0q")
 texture_region_size = Vector2i(32, 32)
 1:0/0 = 0
 1:0/0/physics_layer_0/linear_velocity = Vector2(0, 0)

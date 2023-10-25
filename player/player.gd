@@ -10,7 +10,7 @@ var moveSpeed := 300
 var jumpForce := -300
 var hook_force = 100
 
-var bullet_scene := preload('res://bullet.tscn') as PackedScene
+var bullet_scene := preload('res://projectiles/bullet/bullet.tscn') as PackedScene
 
 
 func _input(event: InputEvent) -> void:

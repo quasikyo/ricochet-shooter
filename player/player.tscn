@@ -1,8 +1,8 @@
-[gd_scene load_steps=7 format=3 uid="uid://bqly54b5407rb"]
+[gd_scene load_steps=7 format=3 uid="uid://utlbjh7fedb1"]
 
-[ext_resource type="Script" path="res://player.gd" id="1_lemld"]
-[ext_resource type="Texture2D" uid="uid://12n55pbyf4ix" path="res://my-son.png" id="1_m5jwb"]
-[ext_resource type="PackedScene" uid="uid://c55siupe2rsmb" path="res://hook.tscn" id="3_3g03m"]
+[ext_resource type="Script" path="res://player/player.gd" id="1_765rv"]
+[ext_resource type="Texture2D" uid="uid://12n55pbyf4ix" path="res://graphics/my-son.png" id="2_lfmk2"]
+[ext_resource type="PackedScene" uid="uid://c55siupe2rsmb" path="res://projectiles/grapple_hook/hook.tscn" id="3_3g03m"]
 [ext_resource type="Script" path="res://camera.gd" id="4_nhjwu"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_e4pm8"]
@@ -13,10 +13,10 @@ radius = 64.0312
 
 [node name="Player" type="CharacterBody2D"]
 collision_mask = 11
-script = ExtResource("1_lemld")
+script = ExtResource("1_765rv")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
-texture = ExtResource("1_m5jwb")
+texture = ExtResource("2_lfmk2")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2(0.5, 4.5)
