@@ -1,13 +1,18 @@
-[gd_scene load_steps=4 format=3 uid="uid://bqly54b5407rb"]
+[gd_scene load_steps=7 format=3 uid="uid://bqly54b5407rb"]
 
 [ext_resource type="Script" path="res://player.gd" id="1_lemld"]
 [ext_resource type="Texture2D" uid="uid://12n55pbyf4ix" path="res://my-son.png" id="1_m5jwb"]
+[ext_resource type="PackedScene" uid="uid://c55siupe2rsmb" path="res://hook.tscn" id="3_3g03m"]
+[ext_resource type="Script" path="res://camera.gd" id="4_nhjwu"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_e4pm8"]
 size = Vector2(17, 23)
 
+[sub_resource type="CircleShape2D" id="CircleShape2D_2qj0o"]
+radius = 64.0312
+
 [node name="Player" type="CharacterBody2D"]
-collision_mask = 3
+collision_mask = 11
 script = ExtResource("1_lemld")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
@@ -16,3 +21,16 @@ texture = ExtResource("1_m5jwb")
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2(0.5, 4.5)
 shape = SubResource("RectangleShape2D_e4pm8")
+
+[node name="Hook" parent="." instance=ExtResource("3_3g03m")]
+
+[node name="Camera2D" type="Camera2D" parent="."]
+script = ExtResource("4_nhjwu")
+
+[node name="ParryZone" type="Area2D" parent="."]
+collision_layer = 16
+collision_mask = 2
+
+[node name="ParryCollider" type="CollisionShape2D" parent="ParryZone"]
+position = Vector2(0, 3)
+shape = SubResource("CircleShape2D_2qj0o")

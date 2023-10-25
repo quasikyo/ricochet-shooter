@@ -1,3 +1,4 @@
+class_name Bullet
 extends Area2D
 
 
@@ -11,7 +12,7 @@ func _ready():
 	lifetime.timeout.connect(_on_lifetime_timeout)
 
 
-func _process(deltaSeconds: float) -> void:
+func _physics_process(deltaSeconds: float) -> void:
 	position += direction * speed * deltaSeconds
 
 
