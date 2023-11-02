@@ -1,7 +1,8 @@
-[gd_scene load_steps=5 format=3 uid="uid://dy1fdu0bjxfmv"]
+[gd_scene load_steps=6 format=3 uid="uid://dy1fdu0bjxfmv"]
 
 [ext_resource type="Texture2D" uid="uid://bnwvt5ydk67k" path="res://graphics/platform.png" id="1_dxc0q"]
 [ext_resource type="PackedScene" uid="uid://utlbjh7fedb1" path="res://player/player.tscn" id="2_a2fpn"]
+[ext_resource type="Script" path="res://player/Player.cs" id="3_6ghaa"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_wsvut"]
 texture = ExtResource("1_dxc0q")
@@ -37,6 +38,7 @@ layer_0/tile_data = PackedInt32Array(786445, 65536, 0, 786446, 65536, 0, 786447,
 [node name="Player" parent="." instance=ExtResource("2_a2fpn")]
 unique_name_in_owner = true
 position = Vector2(530, 208)
+script = ExtResource("3_6ghaa")
 
 [node name="Projectiles" type="Node2D" parent="."]
 unique_name_in_owner = true

@@ -1,0 +1,19 @@
+﻿Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 2012
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Ricochet Shooter", "Ricochet Shooter.csproj", "{AAF085B5-C060-463E-9A6D-2F3066BA7EA8}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+	Debug|Any CPU = Debug|Any CPU
+	ExportDebug|Any CPU = ExportDebug|Any CPU
+	ExportRelease|Any CPU = ExportRelease|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{AAF085B5-C060-463E-9A6D-2F3066BA7EA8}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{AAF085B5-C060-463E-9A6D-2F3066BA7EA8}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{AAF085B5-C060-463E-9A6D-2F3066BA7EA8}.ExportDebug|Any CPU.ActiveCfg = ExportDebug|Any CPU
+		{AAF085B5-C060-463E-9A6D-2F3066BA7EA8}.ExportDebug|Any CPU.Build.0 = ExportDebug|Any CPU
+		{AAF085B5-C060-463E-9A6D-2F3066BA7EA8}.ExportRelease|Any CPU.ActiveCfg = ExportRelease|Any CPU
+		{AAF085B5-C060-463E-9A6D-2F3066BA7EA8}.ExportRelease|Any CPU.Build.0 = ExportRelease|Any CPU
+	EndGlobalSection
+EndGlobal

@@ -1,6 +1,6 @@
 [gd_scene load_steps=4 format=3 uid="uid://c55siupe2rsmb"]
 
-[ext_resource type="Script" path="res://projectiles/grapple_hook/hook.gd" id="1_tkyti"]
+[ext_resource type="Script" path="res://projectiles/grapple_hook/Hook.cs" id="1_81hdh"]
 [ext_resource type="Texture2D" uid="uid://6mfysokkdu5j" path="res://graphics/bullet.png" id="2_utt2r"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_sexhs"]
@@ -8,7 +8,7 @@
 [node name="Hook" type="CharacterBody2D"]
 collision_layer = 4
 collision_mask = 10
-script = ExtResource("1_tkyti")
+script = ExtResource("1_81hdh")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 shape = SubResource("CircleShape2D_sexhs")
