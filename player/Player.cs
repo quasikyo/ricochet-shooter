@@ -28,9 +28,8 @@ public partial class Player : CharacterBody2D {
     public override void _Input(InputEvent @event) {
         if (@event.IsActionPressed("primary_action")) {
 			Bullet bullet = BulletScene.Instantiate<Bullet>();
-			bullet.Position = Position;
-			bullet.Direction = (GetGlobalMousePosition() - Position).Normalized();
-			bullet.RotationDegrees = Mathf.RadToDeg(bullet.Direction.Angle()) - 90;
+			bullet.Direction = GetGlobalMousePosition() - Position;
+			bullet.Position = Position + (bullet.Direction * 25);
 			GetNode("%Projectiles").AddChild(bullet);
 		}
 
@@ -41,9 +40,16 @@ public partial class Player : CharacterBody2D {
 		}
 
 		if (@event.IsActionPressed("special_action")) {
-			foreach (Bullet bullet in GetNode<Area2D>("ParryZone").GetOverlappingAreas()) {
-				bullet.Direction = (GetGlobalMousePosition() - Position).Normalized();
-				bullet.RotationDegrees = Mathf.RadToDeg(bullet.Direction.Angle()) - 90;
+			foreach (Bullet bullet in GetNode<Area2D>("ParryZone").GetOverlappingBodies()) {
+				Vector2 newDirection = (GetGlobalMousePosition() - Position).Normalized();
+				float angleDifference = Mathf.Abs(Mathf.RadToDeg(newDirection.Angle() - bullet.Direction.Angle()));
+				bullet.Direction = newDirection;
+
+				if (angleDifference <= 45) {
+					bullet.Speed *= 1.5f;
+				} else if (angleDifference > 180) {
+					bullet.Speed *= 0.8f;
+				}
 			}
 		}
     }

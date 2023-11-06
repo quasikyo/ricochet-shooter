@@ -2,26 +2,45 @@ using Godot;
 
 namespace RicochetShooter;
 
-public partial class Bullet : Area2D {
+public partial class Bullet : CharacterBody2D {
 
+	private float _speed = 100f;
 	[Export]
-	public float Speed { get; set; } = 100f;
+	public float Speed {
+		get => _speed;
+		set {
+			_speed = value;
+			Velocity = Direction * _speed;
+		}
+	}
 
-	public Vector2 Direction { get; set; } = Vector2.Zero;
-
-	public Timer Lifetime { get; set; }
+	private Vector2 _direction = Vector2.Zero;
+	public Vector2 Direction {
+		get => _direction;
+		set {
+			_direction = value.Normalized();
+			Velocity = _direction * Speed;
+			RotationDegrees = Mathf.RadToDeg(_direction.Angle()) - 90;
+		}
+	}
 
     public override void _Ready() {
-		Lifetime = GetNode<Timer>("Lifetime");
-		Lifetime.Timeout += OnLifetimeTimeout;
+		GetNode<Timer>("Lifetime").Timeout += OnLifetimeTimeout;
+		Velocity = Direction * Speed;
     }
 
     public override void _PhysicsProcess(double deltaSeconds) {
-        Position += Direction * Speed * (float)deltaSeconds;
+        // Position += Direction * Speed * (float)deltaSeconds;
+		KinematicCollision2D collision = MoveAndCollide(Velocity * (float)deltaSeconds);
+		if (collision == null) {
+			return;
+		}
+
+		Velocity = Velocity.Bounce(collision.GetNormal());
+		Direction = Velocity.Normalized();
     }
 
     private void OnLifetimeTimeout() {
-		GD.Print("ree");
 		// QueueFree();
 	}
 
