@@ -42,7 +42,7 @@ public partial class Player : CharacterBody2D {
 		if (@event.IsActionPressed("special_action")) {
 			foreach (Bullet bullet in GetNode<Area2D>("ParryZone").GetOverlappingBodies()) {
 				Vector2 newDirection = (GetGlobalMousePosition() - Position).Normalized();
-				float angleDifference = Mathf.Abs(Mathf.RadToDeg(newDirection.Angle() - bullet.Direction.Angle()));
+				float angleDifference = Mathf.Abs(Mathf.RadToDeg(newDirection.Angle() - bullet.Direction.Angle())) % 360;
 				bullet.Direction = newDirection;
 
 				if (angleDifference <= 45) {

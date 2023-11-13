@@ -18,7 +18,7 @@ public partial class Bullet : CharacterBody2D {
 	public Vector2 Direction {
 		get => _direction;
 		set {
-			_direction = value.Normalized();
+			_direction = value.IsNormalized() ? value : value.Normalized();
 			Velocity = _direction * Speed;
 			RotationDegrees = Mathf.RadToDeg(_direction.Angle()) - 90;
 		}

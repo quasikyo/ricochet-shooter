@@ -16,22 +16,24 @@ public partial class Hook : CharacterBody2D {
 	public HookState State { get; set; } = HookState.Inactive;
 	public Vector2 AttachedPosition { get; set; } = Vector2.Zero;
 
-
 	private void Shoot(Vector2 direction) {
 		Position = Vector2.Zero;
 		Direction = direction.Normalized();
 		State = HookState.Flying;
+		Visible = true;
 	}
 
 	private void Release() {
 		State = HookState.Inactive;
 		Position = Vector2.Zero;
 		AttachedPosition = Vector2.Zero;
+		Visible = false;
 	}
 
     public override void _Ready() {
 		GetParent<Player>().ShootHook += Shoot;
 		GetParent<Player>().ReleaseHook += Release;
+		Visible = false;
     }
 
     public override void _PhysicsProcess(double delta) {
@@ -39,7 +41,7 @@ public partial class Hook : CharacterBody2D {
 			GlobalPosition = AttachedPosition;
 		}
 
-		if (State != HookState.Flying) {
+		if (State == HookState.Inactive) {
 			return;
 		}
 
