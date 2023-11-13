@@ -24,14 +24,17 @@ public partial class Bullet : CharacterBody2D {
 		}
 	}
 
+	private WeightComponent weightComponent;
+
     public override void _Ready() {
 		GetNode<Timer>("Lifetime").Timeout += OnLifetimeTimeout;
+		weightComponent = GetNode<WeightComponent>("WeightComponent");
 		Velocity = Direction * Speed;
     }
 
     public override void _PhysicsProcess(double deltaSeconds) {
         // Position += Direction * Speed * (float)deltaSeconds;
-		KinematicCollision2D collision = MoveAndCollide(Velocity * (float)deltaSeconds);
+		KinematicCollision2D collision = MoveAndCollide(Velocity * (float)deltaSeconds * weightComponent.WeightMultiplier);
 		if (collision == null) {
 			return;
 		}

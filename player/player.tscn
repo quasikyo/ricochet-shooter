@@ -1,8 +1,9 @@
-[gd_scene load_steps=7 format=3 uid="uid://utlbjh7fedb1"]
+[gd_scene load_steps=8 format=3 uid="uid://utlbjh7fedb1"]
 
 [ext_resource type="Texture2D" uid="uid://12n55pbyf4ix" path="res://graphics/my-son.png" id="2_lfmk2"]
 [ext_resource type="PackedScene" uid="uid://c55siupe2rsmb" path="res://projectiles/grapple_hook/hook.tscn" id="3_3g03m"]
 [ext_resource type="Script" path="res://camera.gd" id="4_nhjwu"]
+[ext_resource type="PackedScene" uid="uid://uwr7nk56cqpc" path="res://weight_component.tscn" id="4_qlm0x"]
 
 [sub_resource type="GDScript" id="GDScript_ayihh"]
 
@@ -35,3 +36,5 @@ collision_mask = 2
 [node name="ParryCollider" type="CollisionShape2D" parent="ParryZone"]
 position = Vector2(0, 3)
 shape = SubResource("CircleShape2D_2qj0o")
+
+[node name="WeightComponent" parent="." instance=ExtResource("4_qlm0x")]

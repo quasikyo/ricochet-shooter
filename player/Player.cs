@@ -13,6 +13,8 @@ public partial class Player : CharacterBody2D {
 	[Signal]
 	public delegate void ReleaseHookEventHandler();
 
+	private WeightComponent weightComponent;
+
 	public float Speed { get; set; }= 300.0f;
 	public float JumpForce { get; set; } = -400.0f;
 	public float MoveSpeed { get; set; } = 300;
@@ -22,6 +24,7 @@ public partial class Player : CharacterBody2D {
 	public float gravity = ProjectSettings.GetSetting("physics/2d/default_gravity").AsSingle();
 
     public override void _Ready() {
+		weightComponent = GetNode<WeightComponent>("WeightComponent");
 		hook = GetNode<Hook>("Hook");
     }
 
@@ -68,7 +71,7 @@ public partial class Player : CharacterBody2D {
 		if (hook.State == Hook.HookState.Attached) {
 			Vector2 pullDirection = (hook.AttachedPosition - Position).Normalized();
 			// Vector2 pullVelocity = hook.Direction.Normalized() * HookForce;
-			Vector2 pullVelocity = pullDirection * HookForce;
+			Vector2 pullVelocity = pullDirection * HookForce * weightComponent.WeightMultiplier;
 			velocity += pullVelocity;
 		}
 
