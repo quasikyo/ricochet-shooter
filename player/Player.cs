@@ -6,14 +6,11 @@ namespace RicochetShooter;
 public partial class Player : CharacterBody2D {
 
 	public Hook hook;
-	public float HookForce { get; set; } = 100f;
 
 	[Signal]
 	public delegate void ShootHookEventHandler(Vector2 direction);
 	[Signal]
 	public delegate void ReleaseHookEventHandler();
-
-	private WeightComponent weightComponent;
 
 	public float Speed { get; set; }= 300.0f;
 	public float JumpForce { get; set; } = -400.0f;
@@ -24,7 +21,6 @@ public partial class Player : CharacterBody2D {
 	public float gravity = ProjectSettings.GetSetting("physics/2d/default_gravity").AsSingle();
 
     public override void _Ready() {
-		weightComponent = GetNode<WeightComponent>("WeightComponent");
 		hook = GetNode<Hook>("Hook");
     }
 
@@ -33,6 +29,13 @@ public partial class Player : CharacterBody2D {
 			Bullet bullet = BulletScene.Instantiate<Bullet>();
 			bullet.Direction = GetGlobalMousePosition() - Position;
 			bullet.Position = Position + (bullet.Direction * 25);
+			GetNode("%Projectiles").AddChild(bullet);
+		}
+
+		if (@event.IsActionPressed("rigid_bullet")) {
+			RigidBullet bullet = GD.Load<PackedScene>("res://projectiles/bullet/rigid_bullet.tscn").Instantiate<RigidBullet>();
+			bullet.LinearVelocity = (GetGlobalMousePosition() - Position).Normalized() * 1500;
+			bullet.Position = Position + ((GetGlobalMousePosition() - Position).Normalized() * 25);
 			GetNode("%Projectiles").AddChild(bullet);
 		}
 
@@ -71,7 +74,7 @@ public partial class Player : CharacterBody2D {
 		if (hook.State == Hook.HookState.Attached) {
 			Vector2 pullDirection = (hook.AttachedPosition - Position).Normalized();
 			// Vector2 pullVelocity = hook.Direction.Normalized() * HookForce;
-			Vector2 pullVelocity = pullDirection * HookForce * weightComponent.WeightMultiplier;
+			Vector2 pullVelocity = pullDirection * hook.HookForce;
 			velocity += pullVelocity;
 		}
 

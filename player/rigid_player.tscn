@@ -1,0 +1,39 @@
+[gd_scene load_steps=7 format=3 uid="uid://do3mkt7kvfnti"]
+
+[ext_resource type="Script" path="res://player/RigidPlayer.cs" id="1_nactw"]
+[ext_resource type="Texture2D" uid="uid://12n55pbyf4ix" path="res://graphics/my-son.png" id="1_ugkiq"]
+[ext_resource type="PackedScene" uid="uid://c55siupe2rsmb" path="res://projectiles/grapple_hook/hook.tscn" id="3_175d8"]
+
+[sub_resource type="PhysicsMaterial" id="PhysicsMaterial_3ngsl"]
+friction = 0.0
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_15328"]
+size = Vector2(17, 23)
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_6jtm5"]
+radius = 64.0312
+
+[node name="RigidPlayer" type="RigidBody2D"]
+collision_mask = 10
+physics_material_override = SubResource("PhysicsMaterial_3ngsl")
+lock_rotation = true
+script = ExtResource("1_nactw")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture = ExtResource("1_ugkiq")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(0.5, 4.5)
+shape = SubResource("RectangleShape2D_15328")
+
+[node name="Camera2D" type="Camera2D" parent="."]
+
+[node name="Hook" parent="." instance=ExtResource("3_175d8")]
+
+[node name="ParryZone" type="Area2D" parent="."]
+collision_layer = 16
+collision_mask = 2
+
+[node name="ParryCollider" type="CollisionShape2D" parent="ParryZone"]
+position = Vector2(0, 3)
+shape = SubResource("CircleShape2D_6jtm5")

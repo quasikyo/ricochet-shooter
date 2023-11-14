@@ -1,8 +1,7 @@
-[gd_scene load_steps=6 format=3 uid="uid://dy1fdu0bjxfmv"]
+[gd_scene load_steps=5 format=3 uid="uid://dy1fdu0bjxfmv"]
 
 [ext_resource type="Texture2D" uid="uid://bnwvt5ydk67k" path="res://graphics/platform.png" id="1_dxc0q"]
-[ext_resource type="PackedScene" uid="uid://utlbjh7fedb1" path="res://player/player.tscn" id="2_a2fpn"]
-[ext_resource type="Script" path="res://player/Player.cs" id="3_6ghaa"]
+[ext_resource type="PackedScene" uid="uid://do3mkt7kvfnti" path="res://player/rigid_player.tscn" id="2_fk28o"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_wsvut"]
 texture = ExtResource("1_dxc0q")
@@ -33,12 +32,10 @@ sources/0 = SubResource("TileSetAtlasSource_wsvut")
 [node name="TileMap" type="TileMap" parent="Platforms"]
 tile_set = SubResource("TileSet_k2qc8")
 format = 2
-layer_0/tile_data = PackedInt32Array(786445, 65536, 0, 786446, 65536, 0, 786447, 65536, 0, 786448, 65536, 0, 786444, 0, 0, 786449, 131072, 0, 458765, 65536, 0, 458766, 65536, 0, 458767, 65536, 0, 458768, 65536, 0, 458769, 65536, 0, 458764, 0, 0, 458770, 131072, 0, 458773, 65536, 0, 524309, 65536, 0, 589845, 65536, 0, 655381, 65536, 0, 720917, 65536, 0, 786453, 65536, 0, 851989, 65536, 0)
-
-[node name="Player" parent="." instance=ExtResource("2_a2fpn")]
-unique_name_in_owner = true
-position = Vector2(530, 208)
-script = ExtResource("3_6ghaa")
+layer_0/tile_data = PackedInt32Array(786445, 65536, 0, 786446, 65536, 0, 786447, 65536, 0, 786448, 65536, 0, 786444, 0, 0, 786449, 131072, 0, 458765, 65536, 0, 458766, 65536, 0, 458767, 65536, 0, 458768, 65536, 0, 458769, 65536, 0, 458764, 65536, 0, 458770, 131072, 0, 458773, 65536, 0, 524309, 65536, 0, 589845, 65536, 0, 655381, 65536, 0, 720917, 65536, 0, 786453, 65536, 0, 851989, 65536, 0, 458763, 65536, 0, 458762, 65536, 0, 458761, 65536, 0, 458760, 65536, 0, 458759, 65536, 0, 458758, 65536, 0, 458757, 65536, 0, 458756, 65536, 0, 458755, 65536, 0, 458754, 65536, 0, 458753, 65536, 0, 458752, 65536, 0, 524287, 65536, 0)
 
 [node name="Projectiles" type="Node2D" parent="."]
 unique_name_in_owner = true
+
+[node name="RigidPlayer" parent="." instance=ExtResource("2_fk28o")]
+position = Vector2(521, 193)
