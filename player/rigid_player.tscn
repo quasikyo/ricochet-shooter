@@ -5,7 +5,7 @@
 [ext_resource type="PackedScene" uid="uid://c55siupe2rsmb" path="res://projectiles/grapple_hook/hook.tscn" id="3_175d8"]
 
 [sub_resource type="PhysicsMaterial" id="PhysicsMaterial_3ngsl"]
-friction = 0.0
+friction = 0.3
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_15328"]
 size = Vector2(17, 23)

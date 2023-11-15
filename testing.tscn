@@ -1,7 +1,8 @@
-[gd_scene load_steps=5 format=3 uid="uid://dy1fdu0bjxfmv"]
+[gd_scene load_steps=6 format=3 uid="uid://dy1fdu0bjxfmv"]
 
 [ext_resource type="Texture2D" uid="uid://bnwvt5ydk67k" path="res://graphics/platform.png" id="1_dxc0q"]
 [ext_resource type="PackedScene" uid="uid://do3mkt7kvfnti" path="res://player/rigid_player.tscn" id="2_fk28o"]
+[ext_resource type="PackedScene" uid="uid://ctrjcvtqqdt3w" path="res://projectiles/test_box.tscn" id="3_m1nlj"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_wsvut"]
 texture = ExtResource("1_dxc0q")
@@ -39,3 +40,6 @@ unique_name_in_owner = true
 
 [node name="RigidPlayer" parent="." instance=ExtResource("2_fk28o")]
 position = Vector2(521, 193)
+
+[node name="TestBox" parent="." instance=ExtResource("3_m1nlj")]
+position = Vector2(332, 160)

@@ -26,6 +26,8 @@ public partial class RigidPlayer : RigidBody2D {
 	public float HorizontalInput { get; set; } = 0f;
 	public Vector2 horizontalForce = Vector2.Zero;
 
+	private PackedScene RigidBulletScene { get; set; } = GD.Load<PackedScene>("res://projectiles/bullet/rigid_bullet.tscn");
+
 	public override void _Ready() {
 		hook = GetNode<Hook>("Hook");
     }
@@ -38,7 +40,7 @@ public partial class RigidPlayer : RigidBody2D {
 		}
 
 		if (@event.IsActionPressed("primary_action")) {
-			RigidBullet bullet = GD.Load<PackedScene>("res://projectiles/bullet/rigid_bullet.tscn").Instantiate<RigidBullet>();
+			RigidBullet bullet = RigidBulletScene.Instantiate<RigidBullet>();
 			bullet.ApplyCentralImpulse(toMouse * 1500);
 			bullet.Position = Position + (toMouse * 25);
 			bullet.RotationDegrees = Mathf.RadToDeg(toMouse.Angle()) - 90;
@@ -55,7 +57,7 @@ public partial class RigidPlayer : RigidBody2D {
 			IEnumerable<RigidBody2D> parriedProjectiles = GetNode<Area2D>("ParryZone").GetOverlappingBodies().Cast<RigidBody2D>();
 			foreach (RigidBody2D projectile in parriedProjectiles) {
 				projectile.ApplyCentralImpulse(toMouse * ParryForce);
-				projectile.RotationDegrees = Mathf.RadToDeg(toMouse.Angle()) - 90;
+				// projectile.RotationDegrees = Mathf.RadToDeg(toMouse.Angle()) - 90;
 			}
 		}
     }

@@ -72,7 +72,7 @@ public partial class Player : CharacterBody2D {
 		}
 
 		if (hook.State == Hook.HookState.Attached) {
-			Vector2 pullDirection = (hook.AttachedPosition - Position).Normalized();
+			Vector2 pullDirection = (hook.AttachPoint.GlobalPosition - GlobalPosition).Normalized();
 			// Vector2 pullVelocity = hook.Direction.Normalized() * HookForce;
 			Vector2 pullVelocity = pullDirection * hook.HookForce;
 			velocity += pullVelocity;

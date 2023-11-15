@@ -13,12 +13,14 @@ public partial class Hook : CharacterBody2D {
 
 	public RigidPlayer Player { get; set; }
 
+	[Export]
 	public float HookForce { get; set; } = 2500f;
+	[Export]
 	public float Speed { get; set; } = 2000f;
 	public Vector2 Direction { get; set; } = Vector2.Zero;
 	public HookState State { get; set; } = HookState.Inactive;
-	public Vector2 AttachedPosition { get; set; } = Vector2.Zero;
-	public PhysicsBody2D AttachedObject { get; set; } = null;
+	public Marker2D AttachPoint { get; set; }
+	public Node2D AttachedObject { get; set; }
 
 	public override void _Ready() {
 		Player = GetParent<RigidPlayer>();
@@ -28,8 +30,12 @@ public partial class Hook : CharacterBody2D {
     }
 
     public override void _PhysicsProcess(double deltaSeconds) {
-		if (!AttachedPosition.IsZeroApprox()) {
-			GlobalPosition = AttachedPosition;
+		if (State == HookState.Inactive) {
+			return;
+		}
+
+		if (State == HookState.Attached && AttachPoint != null) {
+			GlobalPosition = AttachPoint.GlobalPosition;
 
 			Vector2 fromPlayerToAttached = (GlobalPosition - Player.GlobalPosition).Normalized();
 			float massSum = Player.Mass;
@@ -39,24 +45,26 @@ public partial class Hook : CharacterBody2D {
 				otherMass = rigidbodyReference.Mass;
 				massSum += otherMass;
 
-				rigidbodyReference.ApplyForce(fromPlayerToAttached * -1 * HookForce * (Player.Mass / massSum));
+				float forceTowardPlayer = HookForce * (Player.Mass / massSum);
+				rigidbodyReference.ApplyForce(fromPlayerToAttached * -1 * forceTowardPlayer);
 			}
-			Player.ApplyForce(fromPlayerToAttached * HookForce * (otherMass / massSum));
+			float forceTowardAttached = HookForce * (otherMass / massSum);
+			Player.ApplyCentralForce(fromPlayerToAttached * forceTowardAttached);
 		}
 
-		if (State == HookState.Inactive) {
-			return;
-		}
-
-		KinematicCollision2D collision = MoveAndCollide(Direction * Speed * (float)deltaSeconds);
-		if (collision == null) {
-			return;
-		}
-
-		AttachedPosition = collision.GetPosition();
-		AttachedObject = collision.GetCollider() as PhysicsBody2D;
-		if (State != HookState.Attached) {
+		if (State == HookState.Flying) {
+			KinematicCollision2D collision = MoveAndCollide(Direction * Speed * (float)deltaSeconds);
+			if (collision == null) {
+				return;
+			}
 			State = HookState.Attached;
+
+			AttachedObject = collision.GetCollider() as Node2D;
+			AttachPoint = new Marker2D();
+			AttachedObject.AddChild(AttachPoint);
+			AttachPoint.GlobalPosition = collision.GetPosition();
+
+			SetCollisions(false);
 		}
 	}
 
@@ -70,9 +78,20 @@ public partial class Hook : CharacterBody2D {
 	private void Release() {
 		State = HookState.Inactive;
 		Position = Vector2.Zero;
-		AttachedPosition = Vector2.Zero;
+		// AttachedPosition = Vector2.Zero;
+		AttachPoint?.QueueFree();
+		AttachPoint = null;
 		AttachedObject = null;
 		Visible = false;
+
+		SetCollisions(true);
+	}
+
+	private void SetCollisions(bool isEnabled) {
+		SetCollisionLayerValue(3, isEnabled);
+		SetCollisionMaskValue(2, isEnabled);
+		SetCollisionMaskValue(4, isEnabled);
+		SetCollisionMaskValue(6, isEnabled);
 	}
 
 }
