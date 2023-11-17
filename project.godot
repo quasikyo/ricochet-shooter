@@ -74,6 +74,8 @@ rigid_bullet={
 2d_physics/layer_4="Ground"
 2d_physics/layer_5="Parry Zone"
 2d_physics/layer_6="Objects"
+2d_physics/layer_7="Enemies"
+2d_physics/layer_8="Player Detection"
 
 [rendering]
 
